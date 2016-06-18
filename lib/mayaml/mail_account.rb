@@ -2,7 +2,7 @@
 
 # Copyright (C) 2016 Szymon Kopciewski
 #
-# This file is part of Majson.
+# This file is part of Mayaml.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-module Majson
+module Mayaml
   class MailAccount
     attr_accessor :name
   end

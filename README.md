@@ -1,12 +1,12 @@
-# MAJson
+# MAYaml
 
-[![Gem Version](https://badge.fury.io/rb/majson.svg)](http://badge.fury.io/rb/majson)
+[![Gem Version](https://badge.fury.io/rb/mayaml.svg)](http://badge.fury.io/rb/mayaml)
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'majson'
+    gem 'mayaml'
 
 And then execute:
 
@@ -14,7 +14,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install majson
+    $ gem install mayaml
 
 ## Usage
 

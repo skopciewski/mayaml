@@ -1,12 +1,12 @@
 require "test_helper"
-require "majson/mail_account"
+require "mayaml/mail_account"
 
 class MailAccountTest < Minitest::Test
   def setup
-    @obj = Majson::MailAccount.new
+    @obj = Mayaml::MailAccount.new
   end
 
   def test_ocject_creation
-    assert_instance_of Majson::MailAccount, @obj
+    assert_instance_of Mayaml::MailAccount, @obj
   end
 end

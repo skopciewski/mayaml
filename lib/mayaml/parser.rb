@@ -2,7 +2,7 @@
 
 # Copyright (C) 2016 Szymon Kopciewski
 #
-# This file is part of Majson.
+# This file is part of Mayaml.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,28 +16,12 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-require "majson/mail_account"
+require "json"
 
-module Majson
-  class MailAccountBuilder
-    def self.build
-      builder = new
-      yield(builder)
-      builder.account
-    end
-
-    def initialize
-      @account = MailAccount.new
-    end
-
-    def set_name(name)
-      @account.name = name
-    end
-
-    def account
-      obj = @account.dup
-      @account = MailAccount.new
-      obj
+module Mayaml
+  class Parser
+    def self.get_accounts(json_file)
+      []
     end
   end
 end
