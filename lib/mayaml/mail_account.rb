@@ -19,6 +19,6 @@
 
 module Mayaml
   class MailAccount
-    attr_accessor :name
+    attr_accessor :name, :type, :server, :port, :user, :pass, :mailboxes
   end
 end

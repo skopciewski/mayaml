@@ -34,6 +34,30 @@ module Mayaml
       @account.name = name
     end
 
+    def type(str)
+      @account.type = str.to_sym
+    end
+
+    def server(str)
+      @account.server = str
+    end
+
+    def port(nr)
+      @account.port = nr.to_i
+    end
+
+    def user(str)
+      @account.user = str
+    end
+
+    def pass(str)
+      @account.pass = str
+    end
+
+    def mailboxes(arr)
+      @account.mailboxes = arr
+    end
+
     def account
       obj = @account.dup
       @account = MailAccount.new

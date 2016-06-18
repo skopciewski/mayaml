@@ -18,6 +18,22 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 require "mayaml/version"
+require "mayaml/mail_account_builder"
+require "mayaml/parser"
 
 module Mayaml
+  def self.accounts_from_file(yaml_accounts)
+    raw_accounts = Parser.get_accounts(yaml_accounts)
+    raw_accounts.map do |raw_account|
+      MailAccountBuilder.build do |builder|
+        builder.name raw_account.fetch("name")
+        builder.type raw_account.fetch("type")
+        builder.server raw_account.fetch("server")
+        builder.port raw_account.fetch("port")
+        builder.user raw_account.fetch("user")
+        builder.pass raw_account.fetch("pass")
+        builder.mailboxes raw_account.fetch("mailboxes", [])
+      end
+    end
+  end
 end
