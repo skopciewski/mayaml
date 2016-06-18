@@ -1,4 +1,5 @@
 ---
+kor: a
 - name: acc1
   type: imap
   server: test.mailserver.net
@@ -7,11 +8,3 @@
   pass: sercet_password
   mailboxes:
     - INBOX
-- name: acc2
-  type: imap
-  server: test.mailserver.net
-  port:
-  user: user@mailserver.net
-  pass: sercet_password
-  mailboxes:
-

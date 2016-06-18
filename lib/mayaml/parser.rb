@@ -16,11 +16,13 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-require "json"
+require "yaml"
 
 module Mayaml
   class Parser
     def self.get_accounts(json_file)
+      YAML.load_file json_file
+    rescue Errno::ENOENT, Psych::SyntaxError
       []
     end
   end

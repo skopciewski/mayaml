@@ -30,7 +30,7 @@ module Mayaml
       @account = MailAccount.new
     end
 
-    def set_name(name)
+    def name(name)
       @account.name = name
     end
 
