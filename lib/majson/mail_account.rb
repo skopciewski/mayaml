@@ -17,7 +17,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-require "majson/version"
-
 module Majson
+  class MailAccount
+    attr_accessor :name
+  end
 end

@@ -11,8 +11,8 @@ Gem::Specification.new do |spec|
   spec.version       = Majson::VERSION
   spec.authors       = ["Szymon Kopciewski"]
   spec.email         = ["s.kopciewski@gmail.com"]
-  spec.summary       = "Mail Accounts Json parser - the base classes"
-  spec.description   = "Mail Accounts Json parser - the base classes"
+  spec.summary       = "Mail Accounts from Json parser - the base classes"
+  spec.description   = "Mail Accounts from Json parser - the base classes"
   spec.homepage      = "https://github.com/skopciewski/majson"
   spec.license       = "GPL-3.0"
 
