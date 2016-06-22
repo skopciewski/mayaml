@@ -10,7 +10,7 @@ class MailAccountBuilderTest < Minitest::Test
       builder.port 999
       builder.user "bolo"
       builder.pass "pass"
-      builder.mailboxes ['a', 'b']
+      builder.mailboxes %w(a, b)
     end
     assert_instance_of Mayaml::MailAccount, account
   end
