@@ -38,4 +38,4 @@ def main(args)
   end
 end
 
-main ARGV if __FILE__ == $PROGRAM_NAME
+main ARGV
