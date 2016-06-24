@@ -2,6 +2,8 @@
 
 [![Gem Version](https://badge.fury.io/rb/mayaml.svg)](http://badge.fury.io/rb/mayaml)
 
+This is a base package for mail accounts configuration generators. The ideas is to store mail accounts configuration in one Yaml file and then generates dedicated configs for specific programs (like getmail, mutt, etc...).
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -17,6 +19,28 @@ Or install it yourself as:
     $ gem install mayaml
 
 ## Usage
+
+If ruby bin dir is in your PATH, just call `mayaml-check <path_to_the_yaml_file>` to list recognized accounts. 
+On the other hand, In plugins:
+
+```ruby
+require "mayaml"
+
+Mayaml.accounts_from_file(yaml_path).each { |account| ... }
+```
+
+### Mail account format in Yaml file
+
+```yaml
+- name: account_name
+  type: imap
+  server: test.mailserver.com
+  port: 998
+  user: user@mailserver.com
+  pass: sercet_password
+  mailboxes
+    - INBOX 
+```
 
 ## Versioning
 
