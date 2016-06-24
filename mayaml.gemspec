@@ -11,8 +11,8 @@ Gem::Specification.new do |spec|
   spec.version       = Mayaml::VERSION
   spec.authors       = ["Szymon Kopciewski"]
   spec.email         = ["s.kopciewski@gmail.com"]
-  spec.summary       = "Mail Accounts from Json parser - the base classes"
-  spec.description   = "Mail Accounts from Json parser - the base classes"
+  spec.summary       = "Mail Accounts from Yaml parser - the base classes"
+  spec.description   = "Mail Accounts from Yaml parser - the base classes"
   spec.homepage      = "https://github.com/skopciewski/mayaml"
   spec.license       = "GPL-3.0"
 

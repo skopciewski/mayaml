@@ -17,27 +17,25 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-require "mayaml/version"
-require "mayaml/mail_account/builder"
-require "mayaml/parser"
-
 module Mayaml
-  def self.accounts_from_file(yaml_accounts)
-    raw_accounts = Parser.get_accounts(yaml_accounts)
-    raw_accounts.map do |raw_account|
-      build_account(raw_account)
-    end
-  end
+  class MailAccount
+    class MailboxesValidator
+      attr_reader :errors
 
-  def self.build_account(raw_account)
-    MailAccount::Builder.build do |builder|
-      builder.name raw_account.fetch("name")
-      builder.type raw_account.fetch("type")
-      builder.server raw_account.fetch("server")
-      builder.port raw_account.fetch("port")
-      builder.user raw_account.fetch("user")
-      builder.pass raw_account.fetch("pass")
-      builder.mailboxes raw_account.fetch("mailboxes", [])
+      def initialize(mailboxes)
+        @errors = []
+        @errors << "Mailboxes should be array." unless mailboxes.instance_of? Array
+        if mailboxes.instance_of?(Array) && mailboxes.empty?
+          @errors << "Mailboxes can not be empty."
+        end
+        if mailboxes.instance_of?(Array) && !mailboxes.all? { |box| box.instance_of? String }
+          @errors << "Mailboxes should all be strings."
+        end
+      end
+
+      def valid?
+        @errors.empty?
+      end
     end
   end
 end

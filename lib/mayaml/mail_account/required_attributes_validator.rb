@@ -17,27 +17,22 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-require "mayaml/version"
-require "mayaml/mail_account/builder"
-require "mayaml/parser"
-
 module Mayaml
-  def self.accounts_from_file(yaml_accounts)
-    raw_accounts = Parser.get_accounts(yaml_accounts)
-    raw_accounts.map do |raw_account|
-      build_account(raw_account)
-    end
-  end
+  class MailAccount
+    class RequiredAttributesValidator
+      attr_reader :errors
 
-  def self.build_account(raw_account)
-    MailAccount::Builder.build do |builder|
-      builder.name raw_account.fetch("name")
-      builder.type raw_account.fetch("type")
-      builder.server raw_account.fetch("server")
-      builder.port raw_account.fetch("port")
-      builder.user raw_account.fetch("user")
-      builder.pass raw_account.fetch("pass")
-      builder.mailboxes raw_account.fetch("mailboxes", [])
+      def initialize(mail_account)
+        @errors = []
+        @errors << "Missing name attribute." if mail_account.name.nil?
+        @errors << "Missing server attribute." if mail_account.server.nil?
+        @errors << "Missing user attribute." if mail_account.user.nil?
+        @errors << "Missing pass attribute." if mail_account.pass.nil?
+      end
+
+      def valid?
+        @errors.empty?
+      end
     end
   end
 end
