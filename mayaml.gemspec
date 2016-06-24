@@ -19,7 +19,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
   spec.files         = Dir.glob("{bin,lib}/**/*") + \
                        %w(Gemfile LICENSE README.md CHANGELOG.md)
-  spec.bindir        = "bin"
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
 
   spec.add_development_dependency "rake"
