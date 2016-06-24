@@ -1,19 +1,19 @@
 # coding: utf-8
 
 begin
-  require "./lib/majson/version"
+  require "./lib/mayaml/version"
 rescue LoadError
-  module Majson; VERSION = "0".freeze; end
+  module Mayaml; VERSION = "0".freeze; end
 end
 
 Gem::Specification.new do |spec|
-  spec.name          = "majson"
-  spec.version       = Majson::VERSION
+  spec.name          = "mayaml"
+  spec.version       = Mayaml::VERSION
   spec.authors       = ["Szymon Kopciewski"]
   spec.email         = ["s.kopciewski@gmail.com"]
-  spec.summary       = "Mail Accounts Json parser - the base classes"
-  spec.description   = "Mail Accounts Json parser - the base classes"
-  spec.homepage      = "https://github.com/skopciewski/majson"
+  spec.summary       = "Mail Accounts from Yaml parser - the base classes"
+  spec.description   = "Mail Accounts from Yaml parser - the base classes"
+  spec.homepage      = "https://github.com/skopciewski/mayaml"
   spec.license       = "GPL-3.0"
 
   spec.require_paths = ["lib"]

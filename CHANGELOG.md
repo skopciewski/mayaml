@@ -1,3 +1,3 @@
-=== 1.0.0 (xxxx.xx.xx)
+=== 1.0.0 (2016.06.24)
 
 * publication of the code
