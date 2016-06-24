@@ -2,7 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/mayaml.svg)](http://badge.fury.io/rb/mayaml)
 
-This is a base package for mail accounts configuration generators. The ideas is to store mail accounts configuration in one Yaml file and then generates dedicated configs for specific programs (like getmail, mutt, etc...).
+This is a base package for mail accounts configuration generators. The idea is to store mail accounts configuration in one Yaml file and then generates dedicated configs for specific programs (like getmail, mutt, etc...).
 
 ## Installation
 
@@ -38,7 +38,7 @@ Mayaml.accounts_from_file(yaml_path).each { |account| ... }
   port: 998
   user: user@mailserver.com
   pass: sercet_password
-  mailboxes
+  mailboxes:
     - INBOX 
 ```
 
