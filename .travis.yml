@@ -11,7 +11,7 @@ install:
   - docker build -t mayaml .
 
 script:
-  - docker run -it --rm -e  -v CODECLIMATE_REPO_TOKEN=$CC  $TRAVIS_BUILD_DIR:/opt/project/code mayaml bundle exec rake
+  - docker run -it --rm -e CODECLIMATE_REPO_TOKEN=$CC -v $TRAVIS_BUILD_DIR:/opt/project/code mayaml bundle exec rake
 
 deploy:
   provider: rubygems
