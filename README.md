@@ -33,6 +33,8 @@ Mayaml.accounts_from_file(yaml_path).each { |account| ... }
 
 ```yaml
 - name: account_name
+  default: false
+  realname: Jon Foo
   type: imap
   server: test.mailserver.com
   port: 998
@@ -41,6 +43,21 @@ Mayaml.accounts_from_file(yaml_path).each { |account| ... }
   mailboxes:
     - INBOX 
 ```
+
+#### Required attributes
+
+* `name`
+* `type`
+* `server`
+* `port`
+* `user`
+* `pass`
+* `realname`
+
+#### Default attributes
+
+* `mailboxes` => `[]`
+* `default` => `false`
 
 ## Versioning
 
