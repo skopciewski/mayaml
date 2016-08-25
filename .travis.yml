@@ -3,11 +3,11 @@ sudo: required
 services:
   - docker
 
-before_install:
+install:
   - docker build -t mayaml .
 
 script:
-  - docker run -it --rm -v .:/opt/project/code mayaml bundle exec rake
+  - docker run -it --rm -v $TRAVIS_BUILD_DIR:/opt/project/code mayaml bundle exec rake
 
 addons:
   code_climate:
