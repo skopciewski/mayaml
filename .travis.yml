@@ -1,12 +1,10 @@
 sudo: required
 
-addons:
-  code_climate:
-    repo_token: "$CC"
-
 services:
   - docker
 
+before_install:
+  - git checkout -qf $TRAVIS_BRANCH
 install:
   - docker build -t mayaml .
 
