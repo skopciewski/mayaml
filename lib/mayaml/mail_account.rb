@@ -45,9 +45,5 @@ module Mayaml
           #{@type} - #{@server}:#{@port} [#{@mailboxes.join(",")}]
       DESC
     end
-
-    def test
-      # bla bla bla bla bla
-    end
   end
 end
