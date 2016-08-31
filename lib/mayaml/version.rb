@@ -18,5 +18,5 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 module Mayaml
-  VERSION = "1.0.3".freeze
+  VERSION = "2.0.0".freeze
 end
