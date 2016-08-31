@@ -44,10 +44,7 @@ module Mayaml
         if str.nil? || str == ""
           @account.set_default_type
         else
-          validator = TypeValidator.new str
-          unless validator.valid?
-            raise WrongAccountType, validator.errors.join(" ")
-          end
+          valid_attribute TypeValidator, WrongAccountType, str
           @account.type = str.to_sym
         end
       end
@@ -60,10 +57,7 @@ module Mayaml
         if nr.nil? || nr == ""
           @account.set_default_port
         else
-          validator = PortValidator.new nr
-          unless validator.valid?
-            raise WrongAccountPort, validator.errors.join(" ")
-          end
+          valid_attribute PortValidator, WrongAccountPort, nr
           @account.port = nr.to_i
         end
       end
@@ -80,10 +74,7 @@ module Mayaml
         if arr.nil? || arr.empty?
           @account.set_default_mailboxes
         else
-          validator = MailboxesValidator.new arr
-          unless validator.valid?
-            raise WrongAccountMailboxes, validator.errors.join(" ")
-          end
+          valid_attribute MailboxesValidator, WrongAccountMailboxes, arr
           @account.mailboxes = arr
         end
       end
@@ -102,6 +93,11 @@ module Mayaml
           raise MissingAttributes, validator.errors.join(" ")
         end
         @account.dup
+      end
+
+      def valid_attribute(validator_class, error_class, attribute)
+        validator = validator_class.new attribute
+        raise error_class, validator.errors.join(" ") unless validator.valid?
       end
     end
   end
