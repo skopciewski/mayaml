@@ -1,3 +1,7 @@
+=== 2.0.1 (2016.08.31)
+
+* update tests
+
 === 2.0.0 (2016.08.31)
 
 * add new attributes to the mail_account format: `default` and `realname`
