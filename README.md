@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-If ruby bin dir is in your PATH, just call `mayaml-check <path_to_the_yaml_file>` to list recognized accounts. 
+If ruby bin dir is in your PATH, just call `mayaml-check <path_to_the_yaml_file>` to list recognized accounts.
 On the other hand, In plugins:
 
 ```ruby
@@ -41,7 +41,7 @@ Mayaml.accounts_from_file(yaml_path).each { |account| ... }
   user: user@mailserver.com
   pass: sercet_password
   mailboxes:
-    - INBOX 
+    - INBOX
 ```
 
 #### Required attributes

@@ -10,6 +10,8 @@ class MailAccountBuilderTest < Minitest::Test
   def valid_account
     Mayaml::MailAccount::Builder.build do |builder|
       builder.name "test"
+      builder.default "true"
+      builder.realname "realname"
       builder.type "pop3"
       builder.server "test.test.com"
       builder.port "999"
@@ -22,7 +24,11 @@ class MailAccountBuilderTest < Minitest::Test
   def default_account
     Mayaml::MailAccount::Builder.build do |builder|
       builder.name "test"
+      builder.realname "realname"
+      builder.type "imap"
       builder.server "test.test.com"
+      builder.port "993"
+      builder.user "bolo"
       builder.user "bolo"
       builder.pass "pass"
     end
@@ -36,6 +42,10 @@ class MailAccountBuilderTest < Minitest::Test
 
   def test_that_account_has_right_name
     assert_equal "test", @account.name
+  end
+
+  def test_that_account_has_default_flag_converted_to_bool
+    assert_equal true, @account.default
   end
 
   def test_that_account_has_type_converted_to_sym
@@ -62,16 +72,18 @@ class MailAccountBuilderTest < Minitest::Test
     assert_equal "b", @account.mailboxes[1]
   end
 
-  def test_that_account_has_default_type
-    assert_equal :imap, @account_defaults.type
-  end
-
-  def test_that_account_has_default_port
-    assert_equal 993, @account_defaults.port
+  def test_that_account_has_default_flaf
+    assert_equal false, @account_defaults.default
   end
 
   def test_that_account_has_default_mailboxes
     assert_empty @account_defaults.mailboxes
+  end
+
+  def test_that_builder_raises_error_when_wrong_default_flag_given
+    assert_raises Mayaml::MailAccount::WrongDefaultFlag do
+      Mayaml::MailAccount::Builder.build { |builder| builder.default "xxx" }
+    end
   end
 
   def test_that_builder_raises_error_when_wrong_type_given
@@ -80,32 +92,10 @@ class MailAccountBuilderTest < Minitest::Test
     end
   end
 
-  def test_that_setting_empty_type_gives_account_with_default_value
-    account = Mayaml::MailAccount::Builder.build do |builder|
-      builder.type nil
-      builder.name "test"
-      builder.server "test.test.com"
-      builder.user "bolo"
-      builder.pass "pass"
-    end
-    assert_equal :imap, account.type
-  end
-
   def test_that_builder_raises_error_when_wrong_port_given
     assert_raises Mayaml::MailAccount::WrongAccountPort do
       Mayaml::MailAccount::Builder.build { |builder| builder.port "xxx" }
     end
-  end
-
-  def test_that_setting_empty_port_gives_account_with_default_value
-    account = Mayaml::MailAccount::Builder.build do |builder|
-      builder.port nil
-      builder.name "test"
-      builder.server "test.test.com"
-      builder.user "bolo"
-      builder.pass "pass"
-    end
-    assert_equal 993, account.port
   end
 
   def test_that_builder_raises_error_when_wrong_mailboxes_given
@@ -118,10 +108,13 @@ class MailAccountBuilderTest < Minitest::Test
     account = Mayaml::MailAccount::Builder.build do |builder|
       builder.mailboxes []
       builder.name "test"
+      builder.realname "realname"
+      builder.type "pop3"
       builder.server "test.test.com"
+      builder.port "999"
       builder.user "bolo"
       builder.pass "pass"
     end
-    assert_equal 993, account.port
+    assert_equal [], account.mailboxes
   end
 end

@@ -6,7 +6,10 @@ class MailAccountRequiredAttributesValidatorTest < Minitest::Test
   def valid_account
     account = Mayaml::MailAccount.new
     account.name = "name"
+    account.realname = "Jon Doe"
+    account.type = :imap
     account.server = "server.com"
+    account.port = 998
     account.user = "user"
     account.pass = "pass"
     account
@@ -24,7 +27,10 @@ class MailAccountRequiredAttributesValidatorTest < Minitest::Test
 
   def test_that_oject_is_invalid_when_missing_name
     account = Mayaml::MailAccount.new
+    account.realname = "Jon Doe"
+    account.type = :imap
     account.server = "server.com"
+    account.port = 998
     account.user = "user"
     account.pass = "pass"
     validator = Mayaml::MailAccount::RequiredAttributesValidator.new(account)
@@ -40,9 +46,35 @@ class MailAccountRequiredAttributesValidatorTest < Minitest::Test
     refute_empty validator.errors
   end
 
+  def test_that_oject_is_invalid_when_missing_realname
+    account = Mayaml::MailAccount.new
+    account.name = "name"
+    account.type = :imap
+    account.server = "server.com"
+    account.port = 998
+    account.user = "user"
+    account.pass = "pass"
+    validator = Mayaml::MailAccount::RequiredAttributesValidator.new(account)
+    assert_equal false, validator.valid?
+  end
+
+  def test_that_oject_is_invalid_when_missing_type
+    account = Mayaml::MailAccount.new
+    account.name = "name"
+    account.realname = "Jon Doe"
+    account.server = "server.com"
+    account.port = 998
+    account.user = "user"
+    account.pass = "pass"
+    validator = Mayaml::MailAccount::RequiredAttributesValidator.new(account)
+    assert_equal false, validator.valid?
+  end
   def test_that_oject_is_invalid_when_missing_server
     account = Mayaml::MailAccount.new
     account.name = "name"
+    account.realname = "Jon Doe"
+    account.type = :imap
+    account.port = 998
     account.user = "user"
     account.pass = "pass"
     validator = Mayaml::MailAccount::RequiredAttributesValidator.new(account)
@@ -52,7 +84,10 @@ class MailAccountRequiredAttributesValidatorTest < Minitest::Test
   def test_that_oject_is_invalid_when_missing_user
     account = Mayaml::MailAccount.new
     account.name = "name"
+    account.realname = "Jon Doe"
+    account.type = :imap
     account.server = "server.com"
+    account.port = 998
     account.pass = "pass"
     validator = Mayaml::MailAccount::RequiredAttributesValidator.new(account)
     assert_equal false, validator.valid?
@@ -61,7 +96,10 @@ class MailAccountRequiredAttributesValidatorTest < Minitest::Test
   def test_that_oject_is_invalid_when_missing_pass
     account = Mayaml::MailAccount.new
     account.name = "name"
+    account.realname = "Jon Doe"
+    account.type = :imap
     account.server = "server.com"
+    account.port = 998
     account.user = "user"
     validator = Mayaml::MailAccount::RequiredAttributesValidator.new(account)
     assert_equal false, validator.valid?

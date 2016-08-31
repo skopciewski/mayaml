@@ -25,6 +25,8 @@ module Mayaml
       def initialize(mail_account)
         @errors = []
         @errors << "Missing name attribute." if mail_account.name.nil?
+        @errors << "Missing realname attribute." if mail_account.realname.nil?
+        @errors << "Missing type attribute." if mail_account.type.nil?
         @errors << "Missing server attribute." if mail_account.server.nil?
         @errors << "Missing user attribute." if mail_account.user.nil?
         @errors << "Missing pass attribute." if mail_account.pass.nil?
