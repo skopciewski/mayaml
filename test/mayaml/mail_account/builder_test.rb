@@ -72,7 +72,7 @@ class MailAccountBuilderTest < Minitest::Test
     assert_equal "b", @account.mailboxes[1]
   end
 
-  def test_that_account_has_default_flaf
+  def test_that_account_has_default_flag
     assert_equal false, @account_defaults.default
   end
 
