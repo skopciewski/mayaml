@@ -1,3 +1,9 @@
+=== 2.0.0 (2016.08.31)
+
+* add new attributes to the mail_account format: `default` and `realname`
+* now only `mailboxes` and `default` attributes are optional
+* add travis integration
+
 === 1.0.3 (2016.06.24)
 
 * fix bin script

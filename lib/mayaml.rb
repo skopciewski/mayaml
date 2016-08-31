@@ -32,6 +32,8 @@ module Mayaml
   def self.build_account(raw_account)
     MailAccount::Builder.build do |builder|
       builder.name raw_account.fetch("name")
+      builder.default raw_account.fetch("default", "false")
+      builder.realname raw_account.fetch("realname")
       builder.type raw_account.fetch("type")
       builder.server raw_account.fetch("server")
       builder.port raw_account.fetch("port")

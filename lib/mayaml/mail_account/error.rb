@@ -26,6 +26,9 @@ module Mayaml
     class MissingAttributes < Error
     end
 
+    class WrongDefaultFlag < Error
+    end
+
     class WrongAccountType < Error
     end
 

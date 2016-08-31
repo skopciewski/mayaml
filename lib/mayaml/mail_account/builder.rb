@@ -22,6 +22,7 @@ require "mayaml/mail_account/required_attributes_validator"
 require "mayaml/mail_account/type_validator"
 require "mayaml/mail_account/port_validator"
 require "mayaml/mail_account/mailboxes_validator"
+require "mayaml/mail_account/default_flag_validator"
 
 module Mayaml
   class MailAccount
@@ -40,16 +41,22 @@ module Mayaml
         @account.name = name
       end
 
-      def type(str)
-        if str.nil? || str == ""
-          @account.set_default_type
+      def default(flag)
+        if flag.nil? || flag == ""
+          @account.set_default_flag
         else
-          validator = TypeValidator.new str
-          unless validator.valid?
-            raise WrongAccountType, validator.errors.join(" ")
-          end
-          @account.type = str.to_sym
+          valid_attribute DefaultFlagValidator, WrongDefaultFlag, flag
+          @account.default = (["true", true].include? flag)
         end
+      end
+
+      def realname(realname)
+        @account.realname = realname
+      end
+
+      def type(str)
+        valid_attribute TypeValidator, WrongAccountType, str
+        @account.type = str.to_sym
       end
 
       def server(str)
@@ -57,15 +64,8 @@ module Mayaml
       end
 
       def port(nr)
-        if nr.nil? || nr == ""
-          @account.set_default_port
-        else
-          validator = PortValidator.new nr
-          unless validator.valid?
-            raise WrongAccountPort, validator.errors.join(" ")
-          end
-          @account.port = nr.to_i
-        end
+        valid_attribute PortValidator, WrongAccountPort, nr
+        @account.port = nr.to_i
       end
 
       def user(str)
@@ -80,10 +80,7 @@ module Mayaml
         if arr.nil? || arr.empty?
           @account.set_default_mailboxes
         else
-          validator = MailboxesValidator.new arr
-          unless validator.valid?
-            raise WrongAccountMailboxes, validator.errors.join(" ")
-          end
+          valid_attribute MailboxesValidator, WrongAccountMailboxes, arr
           @account.mailboxes = arr
         end
       end
@@ -98,10 +95,13 @@ module Mayaml
 
       def valid_account
         validator = RequiredAttributesValidator.new @account
-        unless validator.valid?
-          raise MissingAttributes, validator.errors.join(" ")
-        end
+        raise MissingAttributes, validator.errors.join(" ") unless validator.valid?
         @account.dup
+      end
+
+      def valid_attribute(validator_class, error_class, attribute)
+        validator = validator_class.new attribute
+        raise error_class, validator.errors.join(" ") unless validator.valid?
       end
     end
   end

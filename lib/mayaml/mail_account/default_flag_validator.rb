@@ -19,27 +19,19 @@
 
 module Mayaml
   class MailAccount
-    attr_accessor :name, :default, :realname, :type, :server, :port, :user, :pass, :mailboxes
+    class DefaultFlagValidator
+      attr_reader :errors
 
-    def initialize
-      set_default_flag
-      set_default_mailboxes
-    end
+      def initialize(flag)
+        @errors = []
+        unless [true, false, "true", "false"].include? flag
+          @errors << "Flag need to be 'true' or 'false'"
+        end
+      end
 
-    def set_default_flag
-      @default = false
-    end
-
-    def set_default_mailboxes
-      @mailboxes = []
-    end
-
-    def to_str
-      default_mark = @default ? "*" : ""
-      <<-DESC
-        Account#{default_mark}: #{@name}<#{@realname}> | user: #{@user}:#{@pass}
-          #{@type} - #{@server}:#{@port} [#{@mailboxes.join(",")}]
-      DESC
+      def valid?
+        @errors.empty?
+      end
     end
   end
 end
