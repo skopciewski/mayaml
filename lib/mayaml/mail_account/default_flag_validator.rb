@@ -24,7 +24,9 @@ module Mayaml
 
       def initialize(flag)
         @errors = []
-        @errors << "Flag need to be 'true' or 'false'" unless [true, false, "true", "false"].include? flag
+        unless [true, false, "true", "false"].include? flag
+          @errors << "Flag need to be 'true' or 'false'"
+        end
       end
 
       def valid?

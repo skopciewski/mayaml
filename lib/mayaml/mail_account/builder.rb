@@ -46,7 +46,7 @@ module Mayaml
           @account.set_default_flag
         else
           valid_attribute DefaultFlagValidator, WrongDefaultFlag, flag
-          @account.default = (['true', true].include? flag)
+          @account.default = (["true", true].include? flag)
         end
       end
 

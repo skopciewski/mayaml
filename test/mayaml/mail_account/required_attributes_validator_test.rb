@@ -69,6 +69,7 @@ class MailAccountRequiredAttributesValidatorTest < Minitest::Test
     validator = Mayaml::MailAccount::RequiredAttributesValidator.new(account)
     assert_equal false, validator.valid?
   end
+
   def test_that_oject_is_invalid_when_missing_server
     account = Mayaml::MailAccount.new
     account.name = "name"

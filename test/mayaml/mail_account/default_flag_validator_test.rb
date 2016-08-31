@@ -23,7 +23,7 @@ class MailAccountDefaultFlagValidatorTest < Minitest::Test
   end
 
   def test_that_flag_is_invalid_when_unknown_string_given
-    validator = Mayaml::MailAccount::DefaultFlagValidator.new('asd')
+    validator = Mayaml::MailAccount::DefaultFlagValidator.new("asd")
     assert_equal false, validator.valid?
   end
 end
