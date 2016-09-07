@@ -12,12 +12,15 @@ class MailAccountBuilderTest < Minitest::Test
       builder.name "test"
       builder.default "true"
       builder.realname "realname"
-      builder.type "pop3"
+      builder.type "pop3ssl"
       builder.server "test.test.com"
       builder.port "999"
       builder.user "bolo"
       builder.pass "pass"
       builder.mailboxes %w(a, b)
+      builder.smtp_protocol "smtp"
+      builder.smtp_port "555"
+      builder.smtp_authenticator "login"
     end
   end
 
@@ -31,6 +34,9 @@ class MailAccountBuilderTest < Minitest::Test
       builder.user "bolo"
       builder.user "bolo"
       builder.pass "pass"
+      builder.smtp_protocol "smtp"
+      builder.smtp_port "555"
+      builder.smtp_authenticator "login"
     end
   end
 
@@ -49,7 +55,7 @@ class MailAccountBuilderTest < Minitest::Test
   end
 
   def test_that_account_has_type_converted_to_sym
-    assert_equal :pop3, @account.type
+    assert_equal :pop3ssl, @account.type
   end
 
   def test_that_account_has_right_server
@@ -78,6 +84,18 @@ class MailAccountBuilderTest < Minitest::Test
 
   def test_that_account_has_default_mailboxes
     assert_empty @account_defaults.mailboxes
+  end
+
+  def test_that_account_has_smpt_protocol_converted_to_sym
+    assert_equal :smtp, @account.smtp_protocol
+  end
+
+  def test_that_account_has_smtp_port_converted_to_int
+    assert_equal 555, @account.smtp_port
+  end
+
+  def test_that_account_has_right_smtp_authenticator
+    assert_equal "login", @account.smtp_authenticator
   end
 
   def test_that_builder_raises_error_when_wrong_default_flag_given
@@ -114,7 +132,22 @@ class MailAccountBuilderTest < Minitest::Test
       builder.port "999"
       builder.user "bolo"
       builder.pass "pass"
+      builder.smtp_protocol "smtp"
+      builder.smtp_port "555"
+      builder.smtp_authenticator "login"
     end
-    assert_equal [], account.mailboxes
+    assert_empty account.mailboxes
+  end
+
+  def test_that_builder_raises_error_when_wrong_smtp_port_given
+    assert_raises Mayaml::MailAccount::WrongAccountSmtpPort do
+      Mayaml::MailAccount::Builder.build { |builder| builder.smtp_port "xxx" }
+    end
+  end
+
+  def test_that_builder_raises_error_when_wrong_smtp_protocol_given
+    assert_raises Mayaml::MailAccount::WrongAccountSmtpProtocol do
+      Mayaml::MailAccount::Builder.build { |builder| builder.smtp_protocol "xxx" }
+    end
   end
 end

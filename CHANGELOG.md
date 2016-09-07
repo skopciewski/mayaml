@@ -1,3 +1,8 @@
+=== 3.0.0 (2016.09.07)
+
+* add new required arrtibutes: `smtp_protocol`, `smtp_port` and `smtp_authenticator`
+* 4 valid account types: `imap`, `pop3`, `imapssl`, `pop3ssl`
+
 === 2.0.1 (2016.08.31)
 
 * update tests

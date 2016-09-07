@@ -24,16 +24,62 @@ module Mayaml
 
       def initialize(mail_account)
         @errors = []
-        @errors << "Missing name attribute." if mail_account.name.nil?
-        @errors << "Missing realname attribute." if mail_account.realname.nil?
-        @errors << "Missing type attribute." if mail_account.type.nil?
-        @errors << "Missing server attribute." if mail_account.server.nil?
-        @errors << "Missing user attribute." if mail_account.user.nil?
-        @errors << "Missing pass attribute." if mail_account.pass.nil?
+        @mail_account = mail_account
+        check_mail_account_attrs
       end
 
       def valid?
         @errors.empty?
+      end
+
+      private
+
+      def check_mail_account_attrs
+        check_missing_name
+        check_missing_realname
+        check_missing_type
+        check_missing_server
+        check_missing_user
+        check_missing_pass
+        check_missing_smtp_protocol
+        check_missing_smtp_port
+        check_missing_smtp_authenticator
+      end
+
+      def check_missing_name
+        @errors << "Missing name attribute." if @mail_account.name.nil?
+      end
+
+      def check_missing_realname
+        @errors << "Missing realname attribute." if @mail_account.realname.nil?
+      end
+
+      def check_missing_type
+        @errors << "Missing type attribute." if @mail_account.type.nil?
+      end
+
+      def check_missing_server
+        @errors << "Missing server attribute." if @mail_account.server.nil?
+      end
+
+      def check_missing_user
+        @errors << "Missing user attribute." if @mail_account.user.nil?
+      end
+
+      def check_missing_pass
+        @errors << "Missing pass attribute." if @mail_account.pass.nil?
+      end
+
+      def check_missing_smtp_protocol
+        @errors << "Missing smtp_protocol attribute." if @mail_account.smtp_protocol.nil?
+      end
+
+      def check_missing_smtp_port
+        @errors << "Missing smtp_port attribute." if @mail_account.smtp_port.nil?
+      end
+
+      def check_missing_smtp_authenticator
+        @errors << "Missing smtp_authenticator attribute." if @mail_account.smtp_authenticator.nil?
       end
     end
   end

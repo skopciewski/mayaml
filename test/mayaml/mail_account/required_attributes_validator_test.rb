@@ -12,6 +12,9 @@ class MailAccountRequiredAttributesValidatorTest < Minitest::Test
     account.port = 998
     account.user = "user"
     account.pass = "pass"
+    account.smtp_protocol = :smtp
+    account.smtp_port = 555
+    account.smtp_authenticator = "login"
     account
   end
 
@@ -26,13 +29,8 @@ class MailAccountRequiredAttributesValidatorTest < Minitest::Test
   end
 
   def test_that_oject_is_invalid_when_missing_name
-    account = Mayaml::MailAccount.new
-    account.realname = "Jon Doe"
-    account.type = :imap
-    account.server = "server.com"
-    account.port = 998
-    account.user = "user"
-    account.pass = "pass"
+    account = valid_account
+    account.name = nil
     validator = Mayaml::MailAccount::RequiredAttributesValidator.new(account)
     assert_equal false, validator.valid?
   end
@@ -46,69 +44,57 @@ class MailAccountRequiredAttributesValidatorTest < Minitest::Test
     refute_empty validator.errors
   end
 
-  def test_that_oject_is_invalid_when_missing_realname
-    account = Mayaml::MailAccount.new
-    account.name = "name"
-    account.type = :imap
-    account.server = "server.com"
-    account.port = 998
-    account.user = "user"
-    account.pass = "pass"
-    validator = Mayaml::MailAccount::RequiredAttributesValidator.new(account)
-    assert_equal false, validator.valid?
-  end
-
-  def test_that_oject_is_invalid_when_missing_type
-    account = Mayaml::MailAccount.new
-    account.name = "name"
-    account.realname = "Jon Doe"
-    account.server = "server.com"
-    account.port = 998
-    account.user = "user"
-    account.pass = "pass"
-    validator = Mayaml::MailAccount::RequiredAttributesValidator.new(account)
-    assert_equal false, validator.valid?
-  end
-
-  def test_that_oject_is_invalid_when_missing_server
-    account = Mayaml::MailAccount.new
-    account.name = "name"
-    account.realname = "Jon Doe"
-    account.type = :imap
-    account.port = 998
-    account.user = "user"
-    account.pass = "pass"
-    validator = Mayaml::MailAccount::RequiredAttributesValidator.new(account)
-    assert_equal false, validator.valid?
-  end
-
-  def test_that_oject_is_invalid_when_missing_user
-    account = Mayaml::MailAccount.new
-    account.name = "name"
-    account.realname = "Jon Doe"
-    account.type = :imap
-    account.server = "server.com"
-    account.port = 998
-    account.pass = "pass"
-    validator = Mayaml::MailAccount::RequiredAttributesValidator.new(account)
-    assert_equal false, validator.valid?
-  end
-
-  def test_that_oject_is_invalid_when_missing_pass
-    account = Mayaml::MailAccount.new
-    account.name = "name"
-    account.realname = "Jon Doe"
-    account.type = :imap
-    account.server = "server.com"
-    account.port = 998
-    account.user = "user"
-    validator = Mayaml::MailAccount::RequiredAttributesValidator.new(account)
-    assert_equal false, validator.valid?
-  end
-
   def test_that_invalid_object_have_many_errors
     account = Mayaml::MailAccount.new
     validator = Mayaml::MailAccount::RequiredAttributesValidator.new(account)
     assert_operator 1, :<, validator.errors.count
+  end
+
+  def test_that_oject_is_invalid_when_missing_realname
+    account = valid_account
+    account.realname = nil
+    assert_equal false, Mayaml::MailAccount::RequiredAttributesValidator.new(account).valid?
+  end
+
+  def test_that_oject_is_invalid_when_missing_type
+    account = valid_account
+    account.type = nil
+    assert_equal false, Mayaml::MailAccount::RequiredAttributesValidator.new(account).valid?
+  end
+
+  def test_that_oject_is_invalid_when_missing_server
+    account = valid_account
+    account.server = nil
+    assert_equal false, Mayaml::MailAccount::RequiredAttributesValidator.new(account).valid?
+  end
+
+  def test_that_oject_is_invalid_when_missing_user
+    account = valid_account
+    account.user = nil
+    assert_equal false, Mayaml::MailAccount::RequiredAttributesValidator.new(account).valid?
+  end
+
+  def test_that_oject_is_invalid_when_missing_pass
+    account = valid_account
+    account.pass = nil
+    assert_equal false, Mayaml::MailAccount::RequiredAttributesValidator.new(account).valid?
+  end
+
+  def test_that_oject_is_invalid_when_missing_smtp_protocol
+    account = valid_account
+    account.smtp_protocol = nil
+    assert_equal false, Mayaml::MailAccount::RequiredAttributesValidator.new(account).valid?
+  end
+
+  def test_that_oject_is_invalid_when_missing_smtp_port
+    account = valid_account
+    account.smtp_port = nil
+    assert_equal false, Mayaml::MailAccount::RequiredAttributesValidator.new(account).valid?
+  end
+
+  def test_that_oject_is_invalid_when_missing_smtp_authenticator
+    account = valid_account
+    account.smtp_authenticator = nil
+    assert_equal false, Mayaml::MailAccount::RequiredAttributesValidator.new(account).valid?
   end
 end

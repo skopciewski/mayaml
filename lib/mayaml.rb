@@ -40,6 +40,9 @@ module Mayaml
       builder.user raw_account.fetch("user")
       builder.pass raw_account.fetch("pass")
       builder.mailboxes raw_account.fetch("mailboxes", [])
+      builder.smtp_protocol raw_account.fetch("smtp_protocol")
+      builder.smtp_port raw_account.fetch("smtp_port")
+      builder.smtp_authenticator raw_account.fetch("smtp_authenticator")
     end
   end
 end

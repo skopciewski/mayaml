@@ -23,6 +23,7 @@ require "mayaml/mail_account/type_validator"
 require "mayaml/mail_account/port_validator"
 require "mayaml/mail_account/mailboxes_validator"
 require "mayaml/mail_account/default_flag_validator"
+require "mayaml/mail_account/smtp_protocol_validator"
 
 module Mayaml
   class MailAccount
@@ -83,6 +84,20 @@ module Mayaml
           valid_attribute MailboxesValidator, WrongAccountMailboxes, arr
           @account.mailboxes = arr
         end
+      end
+
+      def smtp_protocol(str)
+        valid_attribute SmtpProtocolValidator, WrongAccountSmtpProtocol, str
+        @account.smtp_protocol = str.to_sym
+      end
+
+      def smtp_port(nr)
+        valid_attribute PortValidator, WrongAccountSmtpPort, nr
+        @account.smtp_port = nr.to_i
+      end
+
+      def smtp_authenticator(str)
+        @account.smtp_authenticator = str
       end
 
       def account
