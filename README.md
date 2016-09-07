@@ -43,17 +43,23 @@ Mayaml.accounts_from_file(yaml_path).each { |account| ... }
   pass: sercet_password
   mailboxes:
     - INBOX
+  smtp_protocol: smtps
+  smtp_port: 587
+  smtp_authenticator: login
 ```
 
 #### Required attributes
 
 * `name`
-* `type`
+* `realname`
+* `type` [imap | imapssl | pop3 | pop3ssl]
 * `server`
 * `port`
 * `user`
 * `pass`
-* `realname`
+* `smtp_protocol` [smpt | smtps]
+* `smtp_port`
+* `smtp_authenticator`
 
 #### Default attributes
 

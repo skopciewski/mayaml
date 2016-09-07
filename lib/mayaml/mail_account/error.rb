@@ -37,5 +37,11 @@ module Mayaml
 
     class WrongAccountMailboxes < Error
     end
+
+    class WrongAccountSmtpPort < Error
+    end
+
+    class WrongAccountSmtpProtocol < Error
+    end
   end
 end

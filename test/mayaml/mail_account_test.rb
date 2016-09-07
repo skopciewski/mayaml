@@ -13,6 +13,9 @@ class MailAccountTest < Minitest::Test
     @obj.user = "user"
     @obj.pass = "pass"
     @obj.mailboxes = ["box"]
+    @obj.smtp_protocol = :smtps
+    @obj.smtp_port = 555
+    @obj.smtp_authenticator = "login"
   end
 
   def test_object_creation

@@ -19,15 +19,16 @@
 
 module Mayaml
   class MailAccount
-    class TypeValidator
+    class SmtpProtocolValidator
       attr_reader :errors
-      VALID_TYPES = [:imap, :pop3, :imapssl, :pop3ssl].freeze
+      VALID_TYPES = [:smtp, :smtps].freeze
 
       def initialize(type)
         @errors = []
         type = type.to_sym if type.respond_to? :to_sym
         unless VALID_TYPES.include?(type)
-          @errors << "Mail account type is invalid. Allowed types: #{VALID_TYPES.join(", ")}."
+          types = VALID_TYPES.join(", ")
+          @errors << "Mail account smtp_protocol is invalid. Allowed types: #{types}."
         end
       end
 

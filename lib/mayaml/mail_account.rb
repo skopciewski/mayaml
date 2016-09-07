@@ -19,7 +19,8 @@
 
 module Mayaml
   class MailAccount
-    attr_accessor :name, :default, :realname, :type, :server, :port, :user, :pass, :mailboxes
+    attr_accessor :name, :default, :realname, :type, :server, :port, :user, :pass, \
+                  :mailboxes, :smtp_protocol, :smtp_port, :smtp_authenticator
 
     def initialize
       set_default_flag
@@ -39,6 +40,7 @@ module Mayaml
       <<-DESC
         Account#{default_mark}: #{@name}<#{@realname}> | user: #{@user}:#{@pass}
           #{@type} - #{@server}:#{@port} [#{@mailboxes.join(",")}]
+          #{@smtp_protocol} - #{@server}:#{@smtp_port} [auth: #{@smtp_authenticator}]
       DESC
     end
   end
