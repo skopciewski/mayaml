@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require "test_helper"
 require "mayaml/mail_account/builder"
 
@@ -17,7 +18,7 @@ class MailAccountBuilderTest < Minitest::Test
       builder.port "999"
       builder.user "bolo"
       builder.pass "pass"
-      builder.mailboxes %w(a, b)
+      builder.mailboxes %w(a b)
       builder.smtp_protocol "smtp"
       builder.smtp_port "555"
       builder.smtp_authenticator "login"

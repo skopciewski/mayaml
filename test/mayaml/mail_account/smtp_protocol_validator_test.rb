@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require "test_helper"
 require "mayaml/mail_account/smtp_protocol_validator"
 
