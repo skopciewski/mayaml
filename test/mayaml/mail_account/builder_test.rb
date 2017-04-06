@@ -22,6 +22,7 @@ class MailAccountBuilderTest < Minitest::Test
       builder.smtp_protocol "smtp"
       builder.smtp_port "555"
       builder.smtp_authenticator "login"
+      builder.smtp_server "test.test.com"
     end
   end
 
@@ -38,6 +39,7 @@ class MailAccountBuilderTest < Minitest::Test
       builder.smtp_protocol "smtp"
       builder.smtp_port "555"
       builder.smtp_authenticator "login"
+      builder.smtp_server "test.test.com"
     end
   end
 
@@ -99,6 +101,10 @@ class MailAccountBuilderTest < Minitest::Test
     assert_equal "login", @account.smtp_authenticator
   end
 
+  def test_that_account_has_right_smtp_server
+    assert_equal "test.test.com", @account.smtp_server
+  end
+
   def test_that_builder_raises_error_when_wrong_default_flag_given
     assert_raises Mayaml::MailAccount::WrongDefaultFlag do
       Mayaml::MailAccount::Builder.build { |builder| builder.default "xxx" }
@@ -136,6 +142,7 @@ class MailAccountBuilderTest < Minitest::Test
       builder.smtp_protocol "smtp"
       builder.smtp_port "555"
       builder.smtp_authenticator "login"
+      builder.smtp_server "test.test.com"
     end
     assert_empty account.mailboxes
   end

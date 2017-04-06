@@ -1,7 +1,6 @@
-# encoding: utf-8
 # frozen_string_literal: true
 
-# Copyright (C) 2016 Szymon Kopciewski
+# Copyright (C) 2017 Szymon Kopciewski
 #
 # This file is part of Mayaml.
 #
@@ -21,19 +20,33 @@
 module Mayaml
   class MailAccount
     class TypeValidator
-      attr_reader :errors
       VALID_TYPES = [:imap, :pop3, :imapssl, :pop3ssl].freeze
 
       def initialize(type)
-        @errors = []
-        type = type.to_sym if type.respond_to? :to_sym
-        unless VALID_TYPES.include?(type)
-          @errors << "Mail account type is invalid. Allowed types: #{VALID_TYPES.join(", ")}."
-        end
+        @type = convert_type(type)
+        errors << "Mail account type is invalid. Allowed types: #{valid_types}." unless valid_type?
       end
 
       def valid?
-        @errors.empty?
+        errors.empty?
+      end
+
+      def errors
+        @errors ||= []
+      end
+
+      private
+
+      def convert_type(type)
+        type.to_sym if type.respond_to? :to_sym
+      end
+
+      def valid_type?
+        VALID_TYPES.include? @type
+      end
+
+      def valid_types
+        VALID_TYPES.join(", ")
       end
     end
   end

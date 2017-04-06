@@ -1,7 +1,6 @@
-# encoding: utf-8
 # frozen_string_literal: true
 
-# Copyright (C) 2016 Szymon Kopciewski
+# Copyright (C) 2017 Szymon Kopciewski
 #
 # This file is part of Mayaml.
 #
@@ -21,17 +20,23 @@
 module Mayaml
   class MailAccount
     class DefaultFlagValidator
-      attr_reader :errors
-
       def initialize(flag)
-        @errors = []
-        unless [true, false, "true", "false"].include? flag
-          @errors << "Flag need to be 'true' or 'false'"
-        end
+        @flag = flag
+        errors << "Flag need to be 'true' or 'false'" unless valid_flag?
       end
 
       def valid?
-        @errors.empty?
+        errors.empty?
+      end
+
+      def errors
+        @errors ||= []
+      end
+
+      private
+
+      def valid_flag?
+        [true, false, "true", "false"].include? @flag
       end
     end
   end

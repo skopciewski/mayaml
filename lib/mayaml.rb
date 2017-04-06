@@ -1,7 +1,7 @@
 # encoding: utf-8
 # frozen_string_literal: true
 
-# Copyright (C) 2016 Szymon Kopciewski
+# Copyright (C) 2017 Szymon Kopciewski
 #
 # This file is part of Mayaml.
 #
@@ -44,6 +44,7 @@ module Mayaml
       builder.smtp_protocol raw_account.fetch("smtp_protocol")
       builder.smtp_port raw_account.fetch("smtp_port")
       builder.smtp_authenticator raw_account.fetch("smtp_authenticator")
+      builder.smtp_server raw_account.fetch("smtp_server")
     end
   end
 end

@@ -1,7 +1,6 @@
-# encoding: utf-8
 # frozen_string_literal: true
 
-# Copyright (C) 2016 Szymon Kopciewski
+# Copyright (C) 2017 Szymon Kopciewski
 #
 # This file is part of Mayaml.
 #
@@ -21,17 +20,24 @@
 module Mayaml
   class MailAccount
     class PortValidator
-      attr_reader :errors
-
       def initialize(port)
-        @errors = []
-        port = port.respond_to?(:to_i) ? port.to_i : 0
-        @errors << "Mail account port is invalid." if port == 0
-        @errors << "Mail account port could not be negative." if port < 0
+        port = conver_port(port)
+        errors << "Mail account port is invalid." if port.zero?
+        errors << "Mail account port could not be negative." if port.negative?
       end
 
       def valid?
-        @errors.empty?
+        errors.empty?
+      end
+
+      def errors
+        @errors ||= []
+      end
+
+      private
+
+      def conver_port(port)
+        port.respond_to?(:to_i) ? port.to_i : 0
       end
     end
   end

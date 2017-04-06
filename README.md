@@ -47,6 +47,7 @@ Mayaml.accounts_from_file(yaml_path).each { |account| ... }
   smtp_protocol: smtps
   smtp_port: 587
   smtp_authenticator: login
+  smtp_server: test.mailserver.com
 ```
 
 #### Required attributes
@@ -61,6 +62,7 @@ Mayaml.accounts_from_file(yaml_path).each { |account| ... }
 * `smtp_protocol` [smpt | smtps]
 * `smtp_port`
 * `smtp_authenticator`
+* `smtp_server`
 
 #### Default attributes
 

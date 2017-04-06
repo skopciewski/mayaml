@@ -1,7 +1,6 @@
-# encoding: utf-8
 # frozen_string_literal: true
 
-# Copyright (C) 2016 Szymon Kopciewski
+# Copyright (C) 2017 Szymon Kopciewski
 #
 # This file is part of Mayaml.
 #
@@ -45,6 +44,7 @@ module Mayaml
         check_missing_smtp_protocol
         check_missing_smtp_port
         check_missing_smtp_authenticator
+        check_missing_smtp_server
       end
 
       def check_missing_name
@@ -81,6 +81,10 @@ module Mayaml
 
       def check_missing_smtp_authenticator
         @errors << "Missing smtp_authenticator attribute." if @mail_account.smtp_authenticator.nil?
+      end
+
+      def check_missing_smtp_server
+        @errors << "Missing smtp_server attribute." if @mail_account.smtp_server.nil?
       end
     end
   end

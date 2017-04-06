@@ -1,7 +1,7 @@
 # encoding: utf-8
 # frozen_string_literal: true
 
-# Copyright (C) 2016 Szymon Kopciewski
+# Copyright (C) 2017 Szymon Kopciewski
 #
 # This file is part of Mayaml.
 #
@@ -21,7 +21,7 @@
 module Mayaml
   class MailAccount
     attr_accessor :name, :default, :realname, :type, :server, :port, :user, :pass, \
-                  :mailboxes, :smtp_protocol, :smtp_port, :smtp_authenticator
+                  :mailboxes, :smtp_protocol, :smtp_port, :smtp_authenticator, :smtp_server
 
     def initialize
       set_default_flag
@@ -41,7 +41,7 @@ module Mayaml
       <<-DESC
         Account#{default_mark}: #{@name}<#{@realname}> | user: #{@user}:#{@pass}
           #{@type} - #{@server}:#{@port} [#{@mailboxes.join(",")}]
-          #{@smtp_protocol} - #{@server}:#{@smtp_port} [auth: #{@smtp_authenticator}]
+          #{@smtp_protocol} - #{@smtp_server}:#{@smtp_port} [auth: #{@smtp_authenticator}]
       DESC
     end
   end

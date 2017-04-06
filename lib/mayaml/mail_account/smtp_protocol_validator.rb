@@ -1,7 +1,6 @@
-# encoding: utf-8
 # frozen_string_literal: true
 
-# Copyright (C) 2016 Szymon Kopciewski
+# Copyright (C) 2017 Szymon Kopciewski
 #
 # This file is part of Mayaml.
 #
@@ -21,20 +20,33 @@
 module Mayaml
   class MailAccount
     class SmtpProtocolValidator
-      attr_reader :errors
       VALID_TYPES = [:smtp, :smtps].freeze
 
       def initialize(type)
-        @errors = []
-        type = type.to_sym if type.respond_to? :to_sym
-        unless VALID_TYPES.include?(type)
-          types = VALID_TYPES.join(", ")
-          @errors << "Mail account smtp_protocol is invalid. Allowed types: #{types}."
-        end
+        @type = convert_type(type)
+        errors << "Mail account smtp_protocol is invalid. Allowed: #{types}." unless valid_type?
       end
 
       def valid?
-        @errors.empty?
+        errors.empty?
+      end
+
+      def errors
+        @errors ||= []
+      end
+
+      private
+
+      def convert_type(type)
+        type.to_sym if type.respond_to? :to_sym
+      end
+
+      def valid_type?
+        VALID_TYPES.include? @type
+      end
+
+      def types
+        VALID_TYPES.join(", ")
       end
     end
   end

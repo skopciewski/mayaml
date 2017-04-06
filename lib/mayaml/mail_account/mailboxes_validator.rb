@@ -1,7 +1,6 @@
-# encoding: utf-8
 # frozen_string_literal: true
 
-# Copyright (C) 2016 Szymon Kopciewski
+# Copyright (C) 2017 Szymon Kopciewski
 #
 # This file is part of Mayaml.
 #
@@ -21,21 +20,33 @@
 module Mayaml
   class MailAccount
     class MailboxesValidator
-      attr_reader :errors
-
       def initialize(mailboxes)
-        @errors = []
-        @errors << "Mailboxes should be array." unless mailboxes.instance_of? Array
-        if mailboxes.instance_of?(Array) && mailboxes.empty?
-          @errors << "Mailboxes can not be empty."
-        end
-        if mailboxes.instance_of?(Array) && !mailboxes.all? { |box| box.instance_of? String }
-          @errors << "Mailboxes should all be strings."
-        end
+        @mailboxes = mailboxes
+        errors << "Mailboxes should be array." unless right_mailboxes_type?
+        errors << "Mailboxes can not be empty." unless mailboxes_exists?
+        errors << "Mailboxes should all be strings." unless right_mailboxes_content?
       end
 
       def valid?
-        @errors.empty?
+        errors.empty?
+      end
+
+      def errors
+        @errors ||= []
+      end
+
+      private
+
+      def right_mailboxes_type?
+        @mailboxes.instance_of? Array
+      end
+
+      def mailboxes_exists?
+        right_mailboxes_type? && !@mailboxes.empty?
+      end
+
+      def right_mailboxes_content?
+        right_mailboxes_type? && @mailboxes.all? { |box| box.instance_of? String }
       end
     end
   end

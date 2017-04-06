@@ -17,20 +17,21 @@ class MailAccountTest < Minitest::Test
     @obj.smtp_protocol = :smtps
     @obj.smtp_port = 555
     @obj.smtp_authenticator = "login"
+    @obj.smtp_server = "server.test.com"
   end
 
   def test_object_creation
     assert_instance_of Mayaml::MailAccount, @obj
   end
 
-  def test_that_can_set_default_mailboxes
+  def test_that_we_can_set_default_mailboxes
     @obj.set_default_mailboxes
-    assert_equal [], @obj.mailboxes
+    assert_empty @obj.mailboxes
   end
 
-  def test_that_can_set_default_flag
+  def test_that_we_can_set_default_flag
     @obj.set_default_flag
-    assert_equal false, @obj.default
+    refute @obj.default
   end
 
   def test_that_object_has_text_representation
