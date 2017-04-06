@@ -1,3 +1,9 @@
+### 4.0.0 (2017.04.06)
+
+* add smpt_server attribute
+* some refactoring
+* update license and cleanup
+
 ### 3.0.1 (2017.04.06)
 
 * fix travis integration
