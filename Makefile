@@ -39,7 +39,7 @@ dev_shell: dev_init
 	fi
 
 clean_images:
-	docker rmi $$(docker images -q ${PROJECT})
+	docker rmi $$(docker images -q ${IMAGE})
 
 update_license:
 	find . -type f -exec \
