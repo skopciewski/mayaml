@@ -101,6 +101,10 @@ module Mayaml
         @account.smtp_authenticator = str
       end
 
+      def smtp_server(str)
+        @account.smtp_server = str
+      end
+
       def account
         obj = valid_account
         @account = ::Mayaml::MailAccount.new
