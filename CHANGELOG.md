@@ -1,3 +1,9 @@
+### 4.0.1 (2017.04.06)
+
+* update license
+* fix makefile
+* cleanup
+
 ### 4.0.0 (2017.04.06)
 
 * add smpt_server attribute
