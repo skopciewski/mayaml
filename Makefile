@@ -43,6 +43,6 @@ clean_images:
 
 update_license:
 	find . -type f -exec \
-		sed -ir "s/(# Copyright .C.) [0-9]{5} (Szymon Kopciewski)/\1 $$(date +%Y) \2/" {} \;
+		sed -i -r "s/(# Copyright .C.) [0-9]{4} (Szymon Kopciewski)/\1 $$(date +%Y) \2/" {} \;
 
 .PHONY: default rebuild dev dev_init dev_install dev_shell clean_images
