@@ -20,7 +20,7 @@
 module Mayaml
   class MailAccount
     class SmtpProtocolValidator
-      VALID_TYPES = [:smtp, :smtps].freeze
+      VALID_TYPES = %i[smtp smtps].freeze
 
       def initialize(type)
         @type = convert_type(type)

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "test_helper"
 require "mayaml/mail_account/type_validator"
 

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "simplecov"
 SimpleCov.start do
   add_filter "test"
@@ -11,6 +12,6 @@ reporter_options = { color: true }
 Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(reporter_options)]
 
 module TestHelper
-  TESTS_DIR = File.expand_path(File.dirname(__FILE__))
+  TESTS_DIR = __dir__
   SUPPORT_DIR = File.join TESTS_DIR, "support"
 end

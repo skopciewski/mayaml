@@ -20,7 +20,7 @@
 module Mayaml
   class MailAccount
     class TypeValidator
-      VALID_TYPES = [:imap, :pop3, :imapssl, :pop3ssl].freeze
+      VALID_TYPES = %i[imap pop3 imapssl pop3ssl].freeze
 
       def initialize(type)
         @type = convert_type(type)
