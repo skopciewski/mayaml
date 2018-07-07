@@ -18,5 +18,5 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 module Mayaml
-  VERSION = "4.0.3"
+  VERSION = "4.0.4"
 end
