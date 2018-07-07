@@ -1,10 +1,11 @@
 # frozen_string_literal: true
+
 require "test_helper"
 require "mayaml/mail_account/mailboxes_validator"
 
 class MailAccountMailboxesValidatorTest < Minitest::Test
   def test_that_mailboxes_are_valid_when_given
-    validator = Mayaml::MailAccount::MailboxesValidator.new(%w(a b))
+    validator = Mayaml::MailAccount::MailboxesValidator.new(%w[a b])
     assert validator.valid?
   end
 

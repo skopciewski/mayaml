@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright (C) 2016, 2017 Szymon Kopciewski
+# Copyright (C) 2016, 2017, 2018 Szymon Kopciewski
 #
 # This file is part of Mayaml.
 #
@@ -20,7 +20,7 @@
 module Mayaml
   class MailAccount
     class TypeValidator
-      VALID_TYPES = [:imap, :pop3, :imapssl, :pop3ssl].freeze
+      VALID_TYPES = %i[imap pop3 imapssl pop3ssl].freeze
 
       def initialize(type)
         @type = convert_type(type)
