@@ -1,3 +1,8 @@
+### 4.0.2 (2018.07.07)
+
+* update license
+* update to ruby 2.5
+
 ### 4.0.1 (2017.04.06)
 
 * update license
