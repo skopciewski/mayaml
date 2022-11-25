@@ -10,3 +10,10 @@ Rake::TestTask.new(:test) do |t|
 end
 
 task default: :test
+
+desc "Run app console"
+task :console do
+  require_relative "./lib/mayaml"
+  require "pry"
+  binding.pry
+end
