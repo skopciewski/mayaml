@@ -1,0 +1,69 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Copyright (C) 2016, 2017, 2018 Szymon Kopciewski
+#
+# This file is part of MayamlMutt.
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+require "mayaml-mutt"
+require "fileutils"
+
+def puts_ussage_message
+  puts <<-END_HELP
+    Ussage: mayaml-mutt-init <path_to_yaml_file> [<destination_file>]
+  END_HELP
+end
+
+def present_configs(configs)
+  alternates = configs.delete(:alternates)
+  puts "### Alternates: #{alternates}"
+  configs.each do |name, config|
+    puts "### Name: #{name} " + "=" * 50
+    puts config
+    puts
+  end
+end
+
+def store_configs(configs, destination_file)
+  alternates = configs.delete(:alternates)
+  File.open(destination_file, "w") do |f|
+    f.write("# vim: filetype=muttrc\n\n")
+    configs.each do |_name, config|
+      f.write(config)
+    end
+    f.write(alternates)
+  end
+end
+
+def check_yaml_path(yaml_path)
+  if yaml_path.nil?
+    puts_ussage_message
+    exit 1
+  end
+  return if File.exist? yaml_path
+  puts "Could not find file: #{yaml_path}"
+  exit 1
+end
+
+def main(args)
+  yaml_path = args.shift
+  destination_file = args.shift
+  check_yaml_path yaml_path
+  configs = MayamlMutt.accounts_init_from_file(yaml_path)
+  destination_file.nil? ? present_configs(configs) : store_configs(configs, destination_file)
+end
+
+main ARGV

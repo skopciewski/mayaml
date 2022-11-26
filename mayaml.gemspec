@@ -21,6 +21,10 @@ Gem::Specification.new do |spec|
     %w[Gemfile LICENSE README.md CHANGELOG.md]
   spec.executables = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
 
+  spec.add_runtime_dependency "mainapp", "~>1"
+  spec.add_runtime_dependency "mustache", "~>1"
+  spec.add_runtime_dependency "ougai"
+
   spec.add_development_dependency "minitest"
   spec.add_development_dependency "minitest-reporters"
   spec.add_development_dependency "pry"

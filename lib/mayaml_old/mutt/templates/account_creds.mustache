@@ -1,0 +1,8 @@
+# vim: filetype=muttrc
+
+set realname="{{ realname }}"
+set from="{{ name }}"
+set smtp_url="{{ smtp_protocol }}://{{ user }}@{{ smtp_server }}:{{ smtp_port }}/" smtp_pass="{{ pass }}"
+set smtp_authenticators="{{ smtp_authenticator }}"
+set ssl_force_tls = yes
+set ssl_starttls = yes

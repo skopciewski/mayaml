@@ -7,6 +7,7 @@ end
 
 require "minitest/autorun"
 require "minitest/reporters"
+require "mayaml"
 
 reporter_options = {color: true}
 Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(reporter_options)]
@@ -14,4 +15,8 @@ Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(reporter_opti
 module TestHelper
   TESTS_DIR = __dir__
   SUPPORT_DIR = File.join TESTS_DIR, "support"
+
+  def base
+    Mayaml::Base
+  end
 end
