@@ -7,7 +7,8 @@ class MayamlMuttAccountInitTest < Minitest::Test
 
   def setup
     @account_data = {
-      name: "foo"
+      name: "foo",
+      index: 1
     }
     @component = base.mutt_account_init_generator
     @view = @component.render @account_data
@@ -26,7 +27,7 @@ class MayamlMuttAccountInitTest < Minitest::Test
 
   def test_that_template_has_alias_line
     assert_match(
-      %r{^alias my_account_1_#{clean_account_name} #{account_name}},
+      %r{^alias my_account_#{index}_#{clean_account_name} #{account_name}},
       @view
     )
   end
@@ -35,6 +36,10 @@ class MayamlMuttAccountInitTest < Minitest::Test
 
   def account_name
     @account_data[:name]
+  end
+
+  def index
+    @account_data[:index]
   end
 
   def clean_account_name

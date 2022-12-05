@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require "mainapp/base"
+require "ougai"
+
 module Mayaml
   class Base
     extend ::Mainapp::Base
