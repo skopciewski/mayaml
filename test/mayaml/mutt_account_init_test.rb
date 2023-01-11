@@ -32,6 +32,13 @@ class MayamlMuttAccountInitTest < Minitest::Test
     )
   end
 
+  %i[name index].each do |value|
+    define_method "test_that_exception_raises_with_missing_#{value}" do
+      invalid_data = @account_data.reject { |k, _| k == value }
+      assert_raises(ArgumentError) { @component.render invalid_data }
+    end
+  end
+
   private
 
   def account_name

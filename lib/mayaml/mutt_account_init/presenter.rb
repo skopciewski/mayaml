@@ -8,11 +8,10 @@ module Mayaml
       include ::Mainapp::Component
       attr_struct :logger
 
-      def for_render(data, infrastructure)
-        infrastructure = infrastructure.to_h
+      def for_render(data)
         {
           name: name(data),
-          accounts_dir: accounts_dir(infrastructure),
+          accounts_dir: accounts_dir(data),
           clean_name: clean_name(data)
         }
       end
@@ -23,8 +22,8 @@ module Mayaml
         data[:name]
       end
 
-      def accounts_dir(infrastructure)
-        infrastructure[:accounts_dir] || "~/.mutt/accounts"
+      def accounts_dir(data)
+        data[:accounts_dir] || "~/.mutt/accounts"
       end
 
       def clean_name(data)

@@ -3,6 +3,7 @@
 require "mayaml/base"
 require "mayaml/mutt_account_init/generator"
 require "mayaml/mutt_account_init/presenter"
+require "mayaml/mutt_account_init/validator"
 
 module Mayaml
   module MuttAccountInit
@@ -11,7 +12,13 @@ module Mayaml
         Generator.new(
           logger: logger.child(component: "mutt_account_init_generator"),
           presenter: mutt_account_init_presenter,
-          infrastructure: {accounts_dir: "~/.mutt/accounts"}
+          validator: mutt_account_init_validator,
+          accounts_dir: "~/.mutt/accounts"
+        )
+      end,
+      mutt_account_init_validator: proc do
+        Validator.new(
+          logger: logger.child(component: "mutt_account_init_validator")
         )
       end,
       mutt_account_init_presenter: proc do
