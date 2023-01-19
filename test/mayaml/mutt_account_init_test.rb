@@ -6,10 +6,7 @@ class MayamlMuttAccountInitTest < Minitest::Test
   include TestHelper
 
   def setup
-    @account_data = {
-      name: "foo",
-      index: 1
-    }
+    @account_data = account_data
     @component = base.mutt_account_init_generator
     @view = @component.render @account_data
   end

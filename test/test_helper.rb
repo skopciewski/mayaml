@@ -19,4 +19,11 @@ module TestHelper
   def base
     Mayaml::Base
   end
+
+  def account_data(index: 1, name: "name1")
+    {
+      index: index,
+      name: name
+    }
+  end
 end
