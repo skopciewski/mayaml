@@ -20,10 +20,16 @@ module TestHelper
     Mayaml::Base
   end
 
-  def account_data(index: 1, name: "name1")
+  def account_data(**params)
     {
-      index: index,
-      name: name
-    }
+      name: "name1",
+      realname: "real1",
+      smtp_protocol: "smtps",
+      smtp_server: "smtp.test.com",
+      smtp_port: 687,
+      smtp_authenticator: "login",
+      user: "u1",
+      pass: "p1"
+    }.merge params
   end
 end

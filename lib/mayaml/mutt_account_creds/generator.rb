@@ -4,15 +4,14 @@ require "mainapp/component"
 require "mustache"
 
 module Mayaml
-  module MuttAccountInit
+  module MuttAccountCreds
     class Generator
       include ::Mainapp::Component
-      attr_struct :logger, :presenter, :accounts_dir, :validator
+      attr_struct :logger, :presenter, :validator
 
-      def render(index, data)
-        ext_data = data.merge(index: index, accounts_dir: accounts_dir)
-        validate_data(ext_data)
-        render_view(ext_data)
+      def render(data)
+        validate_data(data)
+        render_view(data)
       end
 
       private
