@@ -32,6 +32,14 @@ class MayamlMuttAccountCredsTest < Minitest::Test
     end
   end
 
+  %i[realname name smtp_protocol smtp_server smtp_port smtp_authenticator
+    user pass].each do |value|
+    define_method "test_that_exception_raises_with_missing_#{value}" do
+      invalid_data = @account_data.except(value)
+      assert_raises(ArgumentError) { @component.render invalid_data }
+    end
+  end
+
   private
 
   def realname
