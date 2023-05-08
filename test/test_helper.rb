@@ -5,6 +5,8 @@ SimpleCov.start do
   add_filter "test"
 end
 
+ENV["LOG_LEVEL"] ||= "Logger::FATAL"
+
 require "minitest/autorun"
 require "minitest/reporters"
 require "mayaml"
