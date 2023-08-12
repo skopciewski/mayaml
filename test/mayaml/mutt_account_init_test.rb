@@ -8,19 +8,20 @@ class MayamlMuttAccountInitTest < Minitest::Test
   def setup
     @account_data = account_data
     @index = 1
+    @prefix_path = "~/.mutt"
     @component = base.mutt_account_init_generator
-    @view = @component.render @index, @account_data
+    @view = @component.render @index, @prefix_path, @account_data
   end
 
   def teardown
   end
 
   def test_that_template_has_send_hook_line
-    assert_match(%r{^send-hook .*source .*/#{account_name}}, @view)
+    assert_match(%r{^send-hook .*source #{account_file_path}}, @view)
   end
 
   def test_that_template_has_send2_hook_line
-    assert_match(%r{^send2-hook .*source .*/#{account_name}}, @view)
+    assert_match(%r{^send2-hook .*source #{account_file_path}}, @view)
   end
 
   def test_that_template_has_alias_line
@@ -43,5 +44,13 @@ class MayamlMuttAccountInitTest < Minitest::Test
 
   def clean_account_name
     account_name.gsub(/\W/, "_")
+  end
+
+  def account_file_path
+    File.join(
+      @prefix_path,
+      base.default_accounts_dir,
+      account_name
+    )
   end
 end

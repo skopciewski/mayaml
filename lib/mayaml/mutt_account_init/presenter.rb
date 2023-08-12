@@ -6,12 +6,12 @@ module Mayaml
   module MuttAccountInit
     class Presenter
       include ::Mainapp::Component
-      attr_struct :logger
+      attr_struct :logger, :default_accounts_dir
 
       def for_render(data)
         {
           name: name(data),
-          accounts_dir: accounts_dir(data),
+          accounts_path: accounts_path(data),
           clean_name: clean_name(data)
         }
       end
@@ -22,8 +22,11 @@ module Mayaml
         data[:name]
       end
 
-      def accounts_dir(data)
-        data[:accounts_dir] || "~/.mutt/accounts"
+      def accounts_path(data)
+        File.join(
+          data[:prefix_path],
+          default_accounts_dir
+        )
       end
 
       def clean_name(data)

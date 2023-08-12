@@ -7,10 +7,10 @@ module Mayaml
   module MuttAccountInit
     class Generator
       include ::Mainapp::Component
-      attr_struct :logger, :presenter, :accounts_dir, :validator
+      attr_struct :logger, :presenter, :default_accounts_dir, :validator
 
-      def render(index, data)
-        ext_data = data.merge(index: index, accounts_dir: accounts_dir)
+      def render(index, prefix_path, data)
+        ext_data = data.merge(index: index, prefix_path: prefix_path)
         validate_data(ext_data)
         render_view(ext_data)
       end
