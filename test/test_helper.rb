@@ -31,7 +31,8 @@ module TestHelper
       smtp_port: 687,
       smtp_authenticator: "login",
       user: "u1",
-      pass: "p1"
+      pass: "p1",
+      default: false
     }.merge params
   end
 end

@@ -13,7 +13,8 @@ task default: :test
 
 desc "Run app console"
 task :console do
-  require_relative "./lib/mayaml"
-  require "pry"
-  binding.pry
+  # rubocop:disable all
+  require_relative "lib/mayaml"
+  binding.irb
+  # rubocop:enable all
 end
