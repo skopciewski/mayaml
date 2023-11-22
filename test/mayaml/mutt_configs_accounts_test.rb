@@ -17,7 +17,7 @@ class MayamlMuttConfigsAccountsTest < Minitest::Test
   def teardown
   end
 
-  def test_that_resilt_is_an_array
+  def test_that_result_is_an_array
     assert_instance_of(Array, @result)
   end
 
@@ -29,13 +29,21 @@ class MayamlMuttConfigsAccountsTest < Minitest::Test
     assert_equal(2, @result.size)
   end
 
+  def test_that_there_is_right_value
+    assert_match("set from=\"#{acc1_name}\"", @result[0].values.first)
+  end
+
   private
 
   def acc1_path
     File.join(
       @prefix_path,
       base.default_accounts_dir,
-      @account_1[:name]
+      acc1_name
     )
+  end
+
+  def acc1_name
+    @account_1[:name]
   end
 end

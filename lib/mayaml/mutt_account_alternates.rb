@@ -26,7 +26,7 @@ module Mayaml
         )
       end
     }.freeze
+
+    ::Mayaml::Base.set STRUCTURE
   end
 end
-
-Mayaml::Base.set Mayaml::MuttAccountAlternates::STRUCTURE
