@@ -6,7 +6,9 @@ class MayamlMuttAccountAlternatesTest < Minitest::Test
   include TestHelper
 
   def setup
-    @accounts = %w[name1 name2]
+    @account_1 = account_data(name: "acc1@foo.com")
+    @account_2 = account_data(name: "acc2@foo.com")
+    @accounts = [@account_1, @account_2]
     @component = base.mutt_account_alternates_generator
     @view = @component.render @accounts
   end
@@ -36,6 +38,6 @@ class MayamlMuttAccountAlternatesTest < Minitest::Test
   private
 
   def accounts
-    @accounts.join(" ")
+    @accounts.map { _1[:name] }.join(" ")
   end
 end

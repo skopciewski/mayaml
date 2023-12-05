@@ -10,7 +10,7 @@ module Mayaml
 
       def for_render(data)
         {
-          accounts: data.map(&:to_s).join(" ")
+          accounts: data.map { _1[:name] }.join(" ")
         }
       end
     end

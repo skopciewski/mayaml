@@ -30,7 +30,7 @@ module Mayaml
           mutt_account_init_generator.render index, prefix_path, account_data
         end.join("\n")
         view += "\n"
-        view += mutt_account_alternates_generator.render data.map { _1[:name] }
+        view += mutt_account_alternates_generator.render data
         view
       end
     end
