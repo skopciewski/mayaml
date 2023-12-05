@@ -6,7 +6,6 @@ require "mayaml/mutt_configs_accounts/handler"
 module Mayaml
   module MuttConfigsAccounts
     STRUCTURE = {
-      default_accounts_dir: ENV["MAYAML_DEF_ACCOUNTS_DIR"] || "accounts",
       mutt_configs_accounts_handler: proc do
         Handler.new(
           mutt_account_creds_generator: mutt_account_creds_generator,

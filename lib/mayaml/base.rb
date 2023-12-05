@@ -12,7 +12,8 @@ module Mayaml
     logger: Ougai::Logger.new($stdout).tap do |logger|
       logger.level = Kernel.const_get(ENV["LOG_LEVEL"] || "Logger::INFO")
       logger.with_fields = {name: "mayaml"}
-    end
+    end,
+    default_accounts_dir: ENV["MAYAML_DEF_ACCOUNTS_DIR"] || "accounts"
   }.freeze
 
   ::Mayaml::Base.set Mayaml::STRUCTURE
