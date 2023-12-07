@@ -6,7 +6,7 @@ module Mayaml
   module MuttAccountInit
     class Presenter
       include ::Mainapp::Component
-      attr_struct :logger, :default_accounts_dir
+      attr_struct :logger
 
       def for_render(data)
         {
@@ -25,7 +25,7 @@ module Mayaml
       def accounts_path(data)
         File.join(
           data[:prefix_path],
-          default_accounts_dir
+          "accounts"
         )
       end
 

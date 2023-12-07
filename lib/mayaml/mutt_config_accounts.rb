@@ -9,7 +9,6 @@ module Mayaml
       mutt_configs_accounts_handler: proc do
         Handler.new(
           mutt_account_creds_generator: mutt_account_creds_generator,
-          default_accounts_dir: default_accounts_dir,
           logger: logger.child(component: "mutt_configs_accounts_handler")
         )
       end

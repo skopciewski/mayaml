@@ -22,7 +22,6 @@ module Mayaml
       end,
       mutt_account_init_presenter: proc do
         Presenter.new(
-          default_accounts_dir: default_accounts_dir,
           logger: logger.child(component: "mutt_account_init_presenter")
         )
       end

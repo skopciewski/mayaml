@@ -52,7 +52,7 @@ class MayamlMuttConfigsDefaultAccountTest < Minitest::Test
   def link_path
     File.join(
       @prefix_path,
-      base.default_accounts_dir,
+      "accounts",
       "current_acc"
     )
   end
@@ -60,7 +60,7 @@ class MayamlMuttConfigsDefaultAccountTest < Minitest::Test
   def acc_path(n)
     File.join(
       @prefix_path,
-      base.default_accounts_dir,
+      "accounts",
       acc_name(n)
     )
   end

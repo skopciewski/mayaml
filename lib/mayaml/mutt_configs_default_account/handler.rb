@@ -6,7 +6,7 @@ module Mayaml
   module MuttConfigsDefaultAccount
     class Handler
       include ::Mainapp::Component
-      attr_struct :logger, :default_accounts_dir
+      attr_struct :logger
 
       def execute(data, prefix_path)
         account_data = default_account(data) || first_account(data)
@@ -29,7 +29,7 @@ module Mayaml
       def link_path(prefix_path)
         File.join(
           prefix_path,
-          default_accounts_dir,
+          "accounts",
           "current_acc"
         )
       end
@@ -37,7 +37,7 @@ module Mayaml
       def build_path(prefix_path, acc_data)
         File.join(
           prefix_path,
-          default_accounts_dir,
+          "accounts",
           acc_data[:name]
         )
       end

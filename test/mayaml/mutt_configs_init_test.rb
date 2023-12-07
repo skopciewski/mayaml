@@ -43,7 +43,7 @@ class MayamlMuttConfigsInitTest < Minitest::Test
   def init_path
     File.join(
       @prefix_path,
-      base.default_init_file
+      "init.muttrc"
     )
   end
 

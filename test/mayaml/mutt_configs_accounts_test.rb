@@ -38,7 +38,7 @@ class MayamlMuttConfigsAccountsTest < Minitest::Test
   def acc1_path
     File.join(
       @prefix_path,
-      base.default_accounts_dir,
+      "accounts",
       acc1_name
     )
   end

@@ -8,7 +8,6 @@ module Mayaml
     STRUCTURE = {
       mutt_configs_default_account_handler: proc do
         Handler.new(
-          default_accounts_dir: default_accounts_dir,
           logger: logger.child(component: "mutt_configs_default_account_handler")
         )
       end

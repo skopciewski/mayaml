@@ -6,8 +6,7 @@ module Mayaml
   module MuttConfigsInit
     class Handler
       include ::Mainapp::Component
-      attr_struct :logger, :default_init_file, :mutt_account_init_generator,
-        :mutt_account_alternates_generator
+      attr_struct :logger, :mutt_account_init_generator, :mutt_account_alternates_generator
 
       def execute(data, prefix_path)
         key = build_path(prefix_path)
@@ -20,7 +19,7 @@ module Mayaml
       def build_path(prefix_path)
         File.join(
           prefix_path,
-          default_init_file
+          "init.muttrc"
         )
       end
 
