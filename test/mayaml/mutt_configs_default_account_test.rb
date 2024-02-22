@@ -66,6 +66,6 @@ class MayamlMuttConfigsDefaultAccountTest < Minitest::Test
   end
 
   def acc_name(n)
-    instance_variable_get("@account_#{n}")[:name]
+    instance_variable_get(:"@account_#{n}")[:name]
   end
 end

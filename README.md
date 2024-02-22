@@ -2,7 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/mayaml.svg)](http://badge.fury.io/rb/mayaml)
 
-This is a base package for mail accounts configuration generators. The idea is to store mail accounts configuration in one Yaml file and then generates dedicated configs for specific programs (like getmail, mutt, etc...).
+This is a package for generating mutt configuration based on the yaml config. The idea is to store mail accounts configuration in one Yaml file and then generates dedicated mutt environment to handle them.
 
 ## Installation
 
@@ -20,8 +20,9 @@ Or install it yourself as:
 
 ## Usage
 
-If ruby bin dir is in your PATH, just call `mayaml-check <path_to_the_yaml_file>` to list recognized accounts.
-On the other hand, In plugins:
+If ruby bin dir is in your PATH, just call `mayaml-mutt-init <path_to_the_yaml_file> <mutt_config_dir>`.
+
+Or
 
 ```ruby
 require "mayaml"

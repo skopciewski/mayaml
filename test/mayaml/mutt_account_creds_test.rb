@@ -27,14 +27,14 @@ class MayamlMuttAccountCredsTest < Minitest::Test
   end
 
   %i[realname from smtp_url smtp_authenticators].each do |value|
-    define_method "test_that_template_has_right_#{value}_value" do
+    define_method :"test_that_template_has_right_#{value}_value" do
       assert_match(%r{^set #{value}="#{send value}"}, @view)
     end
   end
 
   %i[realname name smtp_protocol smtp_server smtp_port smtp_authenticator
     user pass].each do |value|
-    define_method "test_that_exception_raises_with_missing_#{value}" do
+    define_method :"test_that_exception_raises_with_missing_#{value}" do
       invalid_data = @account_data.except(value)
       assert_raises(ArgumentError) { @component.render invalid_data }
     end
