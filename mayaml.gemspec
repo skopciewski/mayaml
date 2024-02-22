@@ -7,24 +7,28 @@ rescue LoadError
 end
 
 Gem::Specification.new do |spec|
-  spec.name          = "mayaml"
-  spec.version       = Mayaml::VERSION
-  spec.authors       = ["Szymon Kopciewski"]
-  spec.email         = ["s.kopciewski@gmail.com"]
-  spec.summary       = "Mail Accounts from Yaml parser - the base classes"
-  spec.description   = "Mail Accounts from Yaml parser - the base classes"
-  spec.homepage      = "https://github.com/skopciewski/mayaml"
-  spec.license       = "GPL-3.0"
+  spec.name = "mayaml"
+  spec.version = Mayaml::VERSION
+  spec.authors = ["Szymon Kopciewski"]
+  spec.email = ["s.kopciewski@dlamnie.net"]
+  spec.summary = "Mail Accounts from Yaml comfig for mutt"
+  spec.description = "Mail Accounts from Yaml config for mutt"
+  spec.homepage = "https://github.com/skopciewski/mayaml"
+  spec.license = "GPL-3.0"
 
   spec.require_paths = ["lib"]
-  spec.files         = Dir.glob("{bin,lib}/**/*") + \
-                       %w[Gemfile LICENSE README.md CHANGELOG.md]
-  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.files = Dir.glob("{bin,lib}/**/*") + \
+    %w[Gemfile LICENSE README.md CHANGELOG.md]
+  spec.executables = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
 
-  spec.add_development_dependency "codeclimate-test-reporter"
+  spec.add_runtime_dependency "mainapp", "~>1"
+  spec.add_runtime_dependency "mustache", "~>1"
+  spec.add_runtime_dependency "ougai"
+
+  spec.add_development_dependency "debug"
   spec.add_development_dependency "minitest"
   spec.add_development_dependency "minitest-reporters"
-  spec.add_development_dependency "pry"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "simplecov"
+  spec.add_development_dependency "yard"
 end

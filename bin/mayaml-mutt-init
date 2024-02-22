@@ -1,0 +1,75 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "mayaml"
+require "fileutils"
+require "yaml"
+
+def check_yaml_path(yaml_path)
+  if yaml_path.nil?
+    puts_ussage_message
+    exit 1
+  end
+  return if File.exist? yaml_path
+  puts "Could not find file: #{yaml_path}"
+  exit 1
+end
+
+def check_destintaion_dir(dir)
+  if dir.nil?
+    puts_ussage_message
+    exit 1
+  end
+  return if Dir.exist? dir
+  puts "Unknown destination dir: #{dir}"
+  exit 1
+end
+
+def puts_ussage_message
+  puts <<-END_HELP
+    Ussage: mayaml-mutt-init <path_to_yaml_file> <destination_dir>
+  END_HELP
+end
+
+def get_accounts(yaml_path)
+  Psych.safe_load_file yaml_path, symbolize_names: true
+rescue
+  puts "Could not parse file: #{yaml_path}"
+  exit 1
+end
+
+def create_files(data)
+  data.each do |hsh|
+    path = hsh.keys.first
+    content = hsh.values.first
+    FileUtils.mkdir_p File.dirname(path)
+    File.open(path, "w") do |f|
+      f.write(content)
+    end
+    pp "* File created: #{path}"
+  end
+end
+
+def create_aliases(data)
+  data.each do |hsh|
+    path = hsh.keys.first
+    dest = hsh.values.first
+    FileUtils.ln_s(dest, path, force: true)
+    pp "* Symlink created: #{dest} -> #{path}"
+  end
+end
+
+def main(args)
+  yaml_path = args.shift
+  destination_dir = args.shift
+  check_yaml_path yaml_path
+  check_destintaion_dir destination_dir
+  accounts = get_accounts yaml_path
+  create_files Mayaml::Base.mutt_configs_accounts_handler.execute accounts, destination_dir
+  create_files Mayaml::Base.mutt_configs_init_handler.execute accounts, destination_dir
+  create_files Mayaml::Base.mutt_configs_static_handler.execute destination_dir
+  create_aliases Mayaml::Base.mutt_configs_default_account_handler.execute accounts, destination_dir
+  # destination_file.nil? ? present_configs(configs) : store_configs(configs, destination_file)
+end
+
+main ARGV
